@@ -6,7 +6,7 @@
 }
 
 /* content color */
-/*.stApp, .stMarkdown, .stChatMessage, .stAlert, .stInfo {
+.stApp, .stMarkdown, .stChatMessage, .stAlert, .stInfo {
     color: #1a1a1a !important;
 } 
 /* Chat messages */
