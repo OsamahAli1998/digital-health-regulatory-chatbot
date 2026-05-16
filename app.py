@@ -18,7 +18,7 @@ def load_css():
     else:
         st.warning("style.css not found")
 
-#load_css()
+load_css()
 
 # Load API key from .env file
 load_dotenv()
