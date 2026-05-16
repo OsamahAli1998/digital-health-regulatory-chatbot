@@ -4,6 +4,11 @@
 .stApp {
     background-color: #fff5f5;
 }
+
+/* content color */
+.stApp, .stMarkdown, .stChatMessage, .stAlert, .stInfo {
+    color: #1a1a1a !important;
+}
 /* Chat messages */
 [data-testid="stChatMessage"][data-testid="user"] {
     background-color: #e8e6f0;
