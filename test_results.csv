@@ -1,0 +1,51 @@
+Test_ID,Expected,Actual,Pass
+1,GDPR,GDPR,True
+2,GDPR,GDPR,True
+3,MDR,MDR,True
+4,HSL,HSL,True
+5,"OSL, Patientdatalagen","OSL, Patientdatalagen",True
+6,Patientsäkerhetslagen,Patientsäkerhetslagen,True
+7,AI_ACT,AI_ACT,True
+8,GDPR,GDPR,True
+9,"GDPR, MDR","GDPR, MDR",True
+10,"GDPR, HSL","GDPR, HSL",True
+11,"GDPR, OSL, Patientdatalagen","GDPR, OSL, Patientdatalagen",True
+12,"GDPR, Patientsäkerhetslagen","GDPR, Patientsäkerhetslagen",True
+13,"AI_ACT, GDPR","AI_ACT, GDPR",True
+14,"GDPR, MDR","GDPR, MDR",True
+15,"GDPR, HSL","GDPR, HSL",True
+16,"GDPR, OSL, Patientdatalagen","GDPR, OSL, Patientdatalagen",True
+17,"GDPR, Patientsäkerhetslagen","GDPR, Patientsäkerhetslagen",True
+18,"AI_ACT, GDPR","AI_ACT, GDPR",True
+19,"HSL, MDR","HSL, MDR",True
+20,"MDR, OSL, Patientdatalagen","MDR, OSL, Patientdatalagen",True
+21,"MDR, Patientsäkerhetslagen","MDR, Patientsäkerhetslagen",True
+22,"AI_ACT, MDR","AI_ACT, MDR",True
+23,"HSL, OSL, Patientdatalagen","HSL, OSL, Patientdatalagen",True
+24,"HSL, Patientsäkerhetslagen","HSL, Patientsäkerhetslagen",True
+25,"AI_ACT, HSL","AI_ACT, HSL",True
+26,"OSL, Patientdatalagen, Patientsäkerhetslagen","OSL, Patientdatalagen, Patientsäkerhetslagen",True
+27,"AI_ACT, OSL, Patientdatalagen","AI_ACT, OSL, Patientdatalagen",True
+28,"AI_ACT, Patientsäkerhetslagen","AI_ACT, Patientsäkerhetslagen",True
+29,"GDPR, MDR","GDPR, MDR",True
+30,"GDPR, HSL","GDPR, HSL",True
+31,"GDPR, OSL, Patientdatalagen","GDPR, OSL, Patientdatalagen",True
+32,"GDPR, Patientsäkerhetslagen","GDPR, Patientsäkerhetslagen",True
+33,"AI_ACT, GDPR","AI_ACT, GDPR",True
+34,"GDPR, HSL, MDR","GDPR, HSL, MDR",True
+35,"GDPR, MDR, OSL, Patientdatalagen","GDPR, MDR, OSL, Patientdatalagen",True
+36,"GDPR, MDR, Patientsäkerhetslagen","GDPR, MDR, Patientsäkerhetslagen",True
+37,"AI_ACT, GDPR, MDR","AI_ACT, GDPR, MDR",True
+38,"GDPR, HSL, OSL, Patientdatalagen","GDPR, HSL, OSL, Patientdatalagen",True
+39,"GDPR, HSL, Patientsäkerhetslagen","GDPR, HSL, Patientsäkerhetslagen",True
+40,"AI_ACT, GDPR, HSL","AI_ACT, GDPR, HSL",True
+41,"GDPR, OSL, Patientdatalagen, Patientsäkerhetslagen","GDPR, OSL, Patientdatalagen, Patientsäkerhetslagen",True
+42,"AI_ACT, GDPR, OSL, Patientdatalagen","AI_ACT, GDPR, OSL, Patientdatalagen",True
+43,"GDPR, HSL, MDR","GDPR, HSL, MDR",True
+44,"GDPR, MDR, OSL, Patientdatalagen","GDPR, MDR, OSL, Patientdatalagen",True
+45,"GDPR, MDR, Patientsäkerhetslagen","GDPR, MDR, Patientsäkerhetslagen",True
+46,"GDPR, HSL, OSL, Patientdatalagen","GDPR, HSL, OSL, Patientdatalagen",True
+47,"GDPR, HSL, Patientsäkerhetslagen","GDPR, HSL, Patientsäkerhetslagen",True
+48,"HSL, MDR, OSL, Patientdatalagen","HSL, MDR, OSL, Patientdatalagen",True
+49,"GDPR, HSL, MDR, OSL, Patientdatalagen, Patientsäkerhetslagen","GDPR, HSL, MDR, OSL, Patientdatalagen, Patientsäkerhetslagen",True
+50,"AI_ACT, GDPR, HSL, MDR, OSL, Patientdatalagen, Patientsäkerhetslagen","AI_ACT, GDPR, HSL, MDR, OSL, Patientdatalagen, Patientsäkerhetslagen",True

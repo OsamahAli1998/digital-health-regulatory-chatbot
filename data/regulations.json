@@ -1,0 +1,37 @@
+{
+  "GDPR": {
+    "name": "General Data Protection Regulation (GDPR)",
+    "why": "The product processes personal data or health data.",
+    "next_steps": "Review lawful basis, data minimisation, user rights, and security measures."
+  },
+  "MDR": {
+    "name": "Medical Device Regulation (MDR)",
+    "why": "The product may have a medical purpose.",
+    "next_steps": "Review intended use, medical claims, risk classification, and whether expert assessment is needed."
+  },
+  "Patientdatalagen": {
+    "name": "Patientdatalagen (Patient Data Act)",
+    "why": "The product may handle patient records or healthcare information in Sweden.",
+    "next_steps": "Review access control, logging, patient record handling, and data storage requirements."
+  },
+  "HSL": {
+    "name": "Hälso- och sjukvårdslagen",
+    "why": "The product may support healthcare services in Sweden.",
+    "next_steps": "Review how the product supports quality, continuity, and safe healthcare delivery."
+  },
+  "Patientsäkerhetslagen": {
+    "name": "Patientsäkerhetslagen",
+    "why": "Mistakes in the product could affect patient safety.",
+    "next_steps": "Review risk management, incident handling, and clinical safety considerations."
+  },
+  "OSL": {
+    "name": "Offentlighets- och sekretesslagen",
+    "why": "The product may handle confidential patient information.",
+    "next_steps": "Review confidentiality, authorization, and secure access to patient information."
+  },
+  "AI_ACT": {
+    "name": "EU Artificial Intelligence Act",
+    "why": "The product uses AI for decision-making.",
+    "next_steps": "Review transparency, human oversight, and whether the AI system may be high-risk."
+  }
+}

@@ -1,0 +1,30 @@
+[
+  {
+    "id": "personal_data",
+    "question": "Does your product process personal data?"
+  },
+  {
+    "id": "health_data",
+    "question": "Does your product process sensitive health data?"
+  },
+  {
+    "id": "medical_purpose",
+    "question": "Does your product have a medical purpose, such as diagnosis, treatment, or monitoring?"
+  },
+  {
+    "id": "swedish_healthcare",
+    "question": "Will your product be used within the Swedish healthcare system?"
+  },
+  {
+    "id": "patient_records",
+    "question": "Does your product handle patient records or healthcare information?"
+  },
+  {
+    "id": "patient_safety",
+    "question": "Could mistakes in your product affect patient safety?"
+  },
+  {
+    "id": "ai_decision",
+    "question": "Does your product use AI for decision-making?"
+  }
+]

@@ -1,0 +1,35 @@
+/* style.css */
+
+/* App background */
+.stApp {
+    background-color: #fff5f5;
+}
+/* Chat messages */
+[data-testid="stChatMessage"][data-testid="user"] {
+    background-color: #e8e6f0;
+    border-radius: 20px;
+    padding: 10px;
+}
+
+[data-testid="stChatMessage"][data-testid="assistant"] {
+    background-color: #e0f2e9;
+    border-radius: 20px;
+    padding: 10px;
+}
+
+/* Buttons */
+.stButton button {
+    background-color: #c5e0d4;
+    border-radius: 30px;
+    font-weight: 600;
+}
+
+.stButton button:hover {
+    background-color: #b8d9c8;
+    transform: scale(1.02);
+}
+
+/* Primary button (Start) */
+.stButton button[data-baseweb="button"][kind="primary"] {
+    background-color: #9ec8b5;
+}
