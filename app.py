@@ -77,7 +77,7 @@ Keep it simple, be conversational and friendly
         return response.text
     except Exception as e:
         reg_list = ", ".join(triggered_regulations) if triggered_regulations else "no specific regulations"
-        return f"AI summary temporarily unavailable. Based on your answers, review: {reg_list}"
+        return f"Based on your answers, review: {reg_list}"
 
 
 # Initialize session state
