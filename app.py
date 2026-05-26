@@ -113,6 +113,7 @@ IMPORTANT:
 - Give practical meaning: what the user should review or do next
 - Keep the answer short, around 2-3 sentences
 - End with: This is guidance only, not legal advice.
+- If the user asks how or where to find more information, explain where to look instead of explaining only why the regulation applies
 """
 
     client = genai.Client(api_key=get_api_key())
