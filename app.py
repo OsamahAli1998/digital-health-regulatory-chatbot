@@ -64,7 +64,7 @@ IMPORTANT RULES:
     try:
         client = genai.Client(api_key=get_api_key())
         response = client.models.generate_content(
-            model="gemini-2.5-flash-lite",
+            model="gemini-2.5-flash",
             contents=prompt
         )
         return response.text
@@ -76,6 +76,7 @@ if "current_q_index" not in st.session_state:
     st.session_state.current_q_index = 0
     st.session_state.answers = {}
     st.session_state.conversation = []
+    st.session_state.followup_chat = []
     st.session_state.show_results = False
     st.session_state.ai_summary = None
     st.session_state.triggered_regs = []
@@ -93,8 +94,9 @@ with col_reset:
     st.write("")
     if st.button("🔄", help="Start Over - Reset all answers and begin new assessment"):
         for key in [
-            "current_q_index", "answers", "conversation", "show_results",
-            "ai_summary", "triggered_regs", "show_welcome", "session_started"
+            "current_q_index", "answers", "conversation", "followup_chat",
+            "show_results", "ai_summary", "triggered_regs",
+            "show_welcome", "session_started"
         ]:
             if key in st.session_state:
                 del st.session_state[key]
@@ -109,7 +111,7 @@ if st.session_state.show_about:
     st.info(
         "**ℹ️ About this chatbot**\n\n"
         "• Helps identify EU and Swedish regulations for digital health products\n"
-        "• Built with Google Gemini 2.5 Flash-Lite\n"
+        "• Built with Google Gemini AI\n"
         "• ⚠️ Guidance only - Not legal advice\n\n"
         "*Click the ℹ️ button again to close this message*"
     )
@@ -217,15 +219,29 @@ else:
     st.markdown("### 💬 Ask a question about your results")
     st.caption("Only ask questions related to the regulations shown above.")
 
-    user_question = st.text_area(
-        "Ask a question about the regulations shown above:",
+    for msg in st.session_state.followup_chat:
+        with st.chat_message(msg["role"]):
+            st.write(msg["content"])
+
+    user_question = st.text_input(
+        "Ask a follow-up question:",
         placeholder="e.g. Why does GDPR apply to my product?"
     )
 
-    if st.button("Get AI explanation"):
+    if st.button("Send question"):
         if user_question.strip() == "":
             st.warning("Please write a question first.")
         else:
+            st.session_state.followup_chat.append({
+                "role": "user",
+                "content": user_question
+            })
+
+            conversation_text = ""
+            for msg in st.session_state.followup_chat:
+                role = "User" if msg["role"] == "user" else "Assistant"
+                conversation_text += f"{role}: {msg['content']}\n"
+
             prompt = f"""
 You are a regulatory assistant for digital health products.
 
@@ -235,8 +251,10 @@ The user answered:
 The system identified these relevant regulations:
 {', '.join(st.session_state.triggered_regs)}
 
-User question:
-{user_question}
+Conversation so far:
+{conversation_text}
+
+Continue the conversation naturally and answer the latest user question.
 
 IMPORTANT:
 - Answer only based on the regulations listed above
@@ -244,6 +262,7 @@ IMPORTANT:
 - Explain in relation to the user's product and previous answers
 - Give practical meaning: what the user should review or do next
 - Keep the answer short, around 2-3 sentences
+- This is guidance only, not legal advice
 """
 
             try:
@@ -252,7 +271,16 @@ IMPORTANT:
                     model="gemini-2.5-flash",
                     contents=prompt
                 )
-                st.write(response.text)
+
+                ai_answer = response.text
+
+                st.session_state.followup_chat.append({
+                    "role": "assistant",
+                    "content": ai_answer
+                })
+
+                st.rerun()
+
             except Exception as e:
                 st.error(f"Could not generate response: {e}")
 
@@ -261,8 +289,9 @@ IMPORTANT:
     with col2:
         if st.button("🔄 Start New Assessment", use_container_width=True):
             for key in [
-                "current_q_index", "answers", "conversation", "show_results",
-                "ai_summary", "triggered_regs", "show_welcome", "session_started"
+                "current_q_index", "answers", "conversation", "followup_chat",
+                "show_results", "ai_summary", "triggered_regs",
+                "show_welcome", "session_started"
             ]:
                 if key in st.session_state:
                     del st.session_state[key]
