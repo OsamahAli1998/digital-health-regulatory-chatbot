@@ -77,6 +77,7 @@ if "current_q_index" not in st.session_state:
     st.session_state.answers = {}
     st.session_state.conversation = []
     st.session_state.followup_chat = []
+    st.session_state.followup_input = ""
     st.session_state.show_results = False
     st.session_state.ai_summary = None
     st.session_state.triggered_regs = []
@@ -95,7 +96,7 @@ with col_reset:
     if st.button("🔄", help="Start Over - Reset all answers and begin new assessment"):
         for key in [
             "current_q_index", "answers", "conversation", "followup_chat",
-            "show_results", "ai_summary", "triggered_regs",
+            "followup_input", "show_results", "ai_summary", "triggered_regs",
             "show_welcome", "session_started"
         ]:
             if key in st.session_state:
@@ -225,7 +226,8 @@ else:
 
     user_question = st.text_input(
         "Ask a follow-up question:",
-        placeholder="e.g. Why does GDPR apply to my product?"
+        placeholder="e.g. Why does GDPR apply to my product?",
+        key="followup_input"
     )
 
     if st.button("Send question"):
@@ -279,10 +281,11 @@ IMPORTANT:
                     "content": ai_answer
                 })
 
+                st.session_state.followup_input = ""
                 st.rerun()
 
-            except Exception as e:
-                st.error(f"Could not generate response: {e}")
+            except Exception:
+                st.warning("AI is temporarily busy. Please try again in a moment.")
 
     col1, col2, col3 = st.columns([1, 2, 1])
 
@@ -290,8 +293,8 @@ IMPORTANT:
         if st.button("🔄 Start New Assessment", use_container_width=True):
             for key in [
                 "current_q_index", "answers", "conversation", "followup_chat",
-                "show_results", "ai_summary", "triggered_regs",
-                "show_welcome", "session_started"
+                "followup_input", "show_results", "ai_summary",
+                "triggered_regs", "show_welcome", "session_started"
             ]:
                 if key in st.session_state:
                     del st.session_state[key]
