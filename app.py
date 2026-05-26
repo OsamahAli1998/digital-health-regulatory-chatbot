@@ -70,7 +70,7 @@ Keep it simple, be conversational and friendly
 
     try:
         # Create client inside the function
-        client = genai.Client(api_key=os.getenv("GOOGLE_API_KEY"))
+        client = genai.Client(api_key=st.secrets["GOOGLE_API_KEY"])
         response = client.models.generate_content(
            model='gemini-2.5-flash-lite',
             contents=prompt
