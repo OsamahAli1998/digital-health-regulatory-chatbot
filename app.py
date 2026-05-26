@@ -255,7 +255,8 @@ User question:
 IMPORTANT:
 - Only answer questions related to these regulations
 - Do NOT introduce new regulations
-- Keep answer short and clear, around 2-3 sentences
+- Explain in relation to the user’s product and previous answers
+- Keep answer short and clear (2-3 sentences)
 """
 
             try:
