@@ -48,3 +48,38 @@ input, textarea {
     border-radius: 12px !important;
     border: 1px solid #ccc !important;
 }
+
+/* Fix form submit button */
+div[data-testid="stFormSubmitButton"] button {
+    background-color: #f3e8ee !important;
+    color: #111827 !important;
+    border: none !important;
+    border-radius: 10px !important;
+}
+
+/* Hover */
+div[data-testid="stFormSubmitButton"] button:hover {
+    background-color: #e8dce3 !important;
+    color: #111827 !important;
+    border: none !important;
+}
+
+/* Focus */
+div[data-testid="stFormSubmitButton"] button:focus {
+    background-color: #e8dce3 !important;
+    color: #111827 !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+/* Fix text input */
+div[data-testid="stTextInput"] input {
+    background-color: white !important;
+    color: #111827 !important;
+    border-radius: 10px !important;
+}
+
+/* Placeholder text */
+div[data-testid="stTextInput"] input::placeholder {
+    color: #6b7280 !important;
+}
