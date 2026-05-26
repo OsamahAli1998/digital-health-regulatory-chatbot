@@ -223,20 +223,32 @@ else:
                     del st.session_state[key]
             st.rerun()
 
-    # 🔵 Optional AI follow-up question
-st.markdown("### 💬 Ask a follow-up question")
+           else:
+    with st.chat_message("assistant"):
+        if st.session_state.ai_summary is None:
+            with st.spinner("📋 Analyzing your responses..."):
+                st.session_state.triggered_regs = evaluate_regulations(st.session_state.answers)
+                st.session_state.ai_summary = get_llm_explanation(
+                    st.session_state.triggered_regs, 
+                    st.session_state.answers
+                )
 
-user_question = st.text_area(
-    "Ask a question about the regulations shown above:",
-    placeholder="e.g. What does GDPR mean for my product?"
-)
+        st.markdown("### 📋 Regulatory Assessment")
+        st.write(st.session_state.ai_summary)
 
-if st.button("Get AI explanation"):
-    if user_question.strip() == "":
-        st.warning("Please write a question first.")
-    else:
-        # Build safe prompt
-        prompt = f"""
+    # 🔵 AI follow-up question (NOW CORRECT PLACE)
+    st.markdown("### 💬 Ask a question about your results")
+
+    user_question = st.text_area(
+        "Ask a question about the regulations shown above:",
+        placeholder="e.g. Why does GDPR apply to my product?"
+    )
+
+    if st.button("Get AI explanation"):
+        if user_question.strip() == "":
+            st.warning("Please write a question first.")
+        else:
+            prompt = f"""
 You are a regulatory assistant.
 
 The user already received these regulations:
@@ -250,13 +262,12 @@ IMPORTANT:
 - Do NOT introduce new regulations
 - Keep answer short and clear (2-3 sentences)
 """
-
-        try:
-            client = genai.Client(api_key=os.getenv("GOOGLE_API_KEY"))
-            response = client.models.generate_content(
-                model='gemini-2.5-flash-lite',
-                contents=prompt
-            )
-            st.write(response.text)
-        except:
-            st.write("Could not generate response. Please try again.")
+            try:
+                client = genai.Client(api_key=os.getenv("GOOGLE_API_KEY"))
+                response = client.models.generate_content(
+                    model='gemini-2.5-flash-lite',
+                    contents=prompt
+                )
+                st.write(response.text)
+            except:
+                st.write("Could not generate response. Please try again.")
