@@ -37,14 +37,14 @@ regulations = load_json("data/regulations.json")
 def get_llm_explanation(triggered_regulations, user_answers):
     if not triggered_regulations:
         return "No major regulations were identified based on your answers. However, expert review may still be needed."
-    
+
     # Build answer summary
     answer_summary = ""
     for q in questions:
         q_id = q["id"]
         answer = "Yes" if user_answers.get(q_id) else "No"
         answer_summary += f"- {q['question']}: {answer}\n"
-    
+
     prompt = f"""
 You are a regulatory assistant for digital health SMEs in Sweden.
 
@@ -67,7 +67,7 @@ Write a short, friendly explanation (2-3 sentences) telling the user:
 
 Keep it simple, be conversational and friendly
 """
-    
+
     try:
         # Create client inside the function
         client = genai.Client(api_key=os.getenv("GOOGLE_API_KEY"))
@@ -143,7 +143,7 @@ if not st.session_state.session_started:
             if st.button("Start Assessment", use_container_width=True):
                 st.session_state.session_started = True
                 st.rerun()
-    
+
     st.stop()
 
 # Conversation area
@@ -167,6 +167,7 @@ if not st.session_state.show_results:
     if st.session_state.current_q_index < len(questions):
         current_q = questions[st.session_state.current_q_index]
 
+        # Show current question
         with st.chat_message("assistant"):
             st.write(current_q["question"])
 
@@ -213,9 +214,11 @@ else:
                     st.session_state.answers
                 )
 
+        # Display AI summary
         st.markdown("### 📋 Regulatory Assessment")
         st.write(st.session_state.ai_summary)
 
+        # Detailed regulations in expander
         if st.session_state.triggered_regs:
             with st.expander("🔍 View detailed regulation information", expanded=False):
                 for reg_id in st.session_state.triggered_regs:
@@ -241,35 +244,31 @@ else:
             st.warning("Please write a question first.")
         else:
             prompt = f"""
-You are a regulatory assistant for digital health products.
+You are a regulatory assistant.
 
-The user is developing a product with the following characteristics:
-{st.session_state.answers}
-
-The system identified these relevant regulations:
+The user already received these regulations:
 {', '.join(st.session_state.triggered_regs)}
 
 User question:
 {user_question}
 
 IMPORTANT:
-- Answer ONLY based on the regulations listed above
+- Only answer questions related to these regulations
 - Do NOT introduce new regulations
-- Explain clearly WHY the regulation applies to THIS specific product
-- Give practical meaning: what the user should review or do next
-- Keep the answer short, around 2-3 sentences
-- Avoid generic textbook explanations
+- Keep answer short and clear, around 2-3 sentences
+- Explain in relation to the user’s product and previous answers
+- Keep answer short and clear (2-3 sentences)
 """
 
             try:
-                client = genai.Client(api_key=st.secrets["GOOGLE_API_KEY"])
+                client = genai.Client(api_key=os.getenv("GOOGLE_API_KEY"))
                 response = client.models.generate_content(
                     model="gemini-2.5-flash-lite",
                     contents=prompt
                 )
                 st.write(response.text)
-            except Exception as e:
-                st.error(f"Could not generate response: {e}")
+            except Exception:
+                st.write("Could not generate response. Please try again.")
 
     # Start over button
     col1, col2, col3 = st.columns([1, 2, 1])
