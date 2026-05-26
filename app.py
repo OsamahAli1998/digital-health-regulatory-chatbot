@@ -244,19 +244,24 @@ else:
             st.warning("Please write a question first.")
         else:
             prompt = f"""
-You are a regulatory assistant.
+You are a regulatory assistant for digital health products.
 
-The user already received these regulations:
+The user is developing a product with the following characteristics:
+{st.session_state.answers}
+
+The system identified these relevant regulations:
 {', '.join(st.session_state.triggered_regs)}
 
 User question:
 {user_question}
 
 IMPORTANT:
-- Only answer questions related to these regulations
+- Answer ONLY based on the regulations listed above
 - Do NOT introduce new regulations
-- Explain in relation to the user’s product and previous answers
-- Keep answer short and clear (2-3 sentences)
+- Explain clearly WHY the regulation applies to THIS specific product
+- Give practical meaning (what the user must do)
+- Keep the answer short (2–3 sentences)
+- Avoid generic textbook explanations
 """
 
             try:
