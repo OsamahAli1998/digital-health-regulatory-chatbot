@@ -1,6 +1,7 @@
 import json
 import streamlit as st
 import os
+from google import genai
 from dotenv import load_dotenv
 from logic.decision_engine import evaluate_regulations
 
