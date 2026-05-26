@@ -167,7 +167,6 @@ if not st.session_state.show_results:
     if st.session_state.current_q_index < len(questions):
         current_q = questions[st.session_state.current_q_index]
 
-        # Show current question
         with st.chat_message("assistant"):
             st.write(current_q["question"])
 
@@ -214,11 +213,9 @@ else:
                     st.session_state.answers
                 )
 
-        # Display AI summary
         st.markdown("### 📋 Regulatory Assessment")
         st.write(st.session_state.ai_summary)
 
-        # Detailed regulations in expander
         if st.session_state.triggered_regs:
             with st.expander("🔍 View detailed regulation information", expanded=False):
                 for reg_id in st.session_state.triggered_regs:
@@ -259,20 +256,20 @@ IMPORTANT:
 - Answer ONLY based on the regulations listed above
 - Do NOT introduce new regulations
 - Explain clearly WHY the regulation applies to THIS specific product
-- Give practical meaning (what the user must do)
-- Keep the answer short (2–3 sentences)
+- Give practical meaning: what the user should review or do next
+- Keep the answer short, around 2-3 sentences
 - Avoid generic textbook explanations
 """
 
             try:
-                client = genai.Client(api_key=os.getenv("GOOGLE_API_KEY"))
+                client = genai.Client(api_key=st.secrets["GOOGLE_API_KEY"])
                 response = client.models.generate_content(
                     model="gemini-2.5-flash-lite",
                     contents=prompt
                 )
                 st.write(response.text)
-            except Exception:
-                st.write("Could not generate response. Please try again.")
+            except Exception as e:
+                st.error(f"Could not generate response: {e}")
 
     # Start over button
     col1, col2, col3 = st.columns([1, 2, 1])
