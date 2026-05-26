@@ -1,0 +1,129 @@
+test_id,personal_data,health_data,medical_purpose,swedish_healthcare,patient_records,patient_safety,ai_decision,expected,actual,pass
+T1,False,False,False,False,False,False,False,,,PASS
+T2,False,False,False,False,False,False,True,AI_ACT,AI_ACT,PASS
+T3,False,False,False,False,False,True,False,Patientsäkerhetslagen,Patientsäkerhetslagen,PASS
+T4,False,False,False,False,False,True,True,"AI_ACT, Patientsäkerhetslagen","AI_ACT, Patientsäkerhetslagen",PASS
+T5,False,False,False,False,True,False,False,"OSL, Patientdatalagen","OSL, Patientdatalagen",PASS
+T6,False,False,False,False,True,False,True,"AI_ACT, OSL, Patientdatalagen","AI_ACT, OSL, Patientdatalagen",PASS
+T7,False,False,False,False,True,True,False,"OSL, Patientdatalagen, Patientsäkerhetslagen","OSL, Patientdatalagen, Patientsäkerhetslagen",PASS
+T8,False,False,False,False,True,True,True,"AI_ACT, OSL, Patientdatalagen, Patientsäkerhetslagen","AI_ACT, OSL, Patientdatalagen, Patientsäkerhetslagen",PASS
+T9,False,False,False,True,False,False,False,HSL,HSL,PASS
+T10,False,False,False,True,False,False,True,"AI_ACT, HSL","AI_ACT, HSL",PASS
+T11,False,False,False,True,False,True,False,"HSL, Patientsäkerhetslagen","HSL, Patientsäkerhetslagen",PASS
+T12,False,False,False,True,False,True,True,"AI_ACT, HSL, Patientsäkerhetslagen","AI_ACT, HSL, Patientsäkerhetslagen",PASS
+T13,False,False,False,True,True,False,False,"HSL, OSL, Patientdatalagen","HSL, OSL, Patientdatalagen",PASS
+T14,False,False,False,True,True,False,True,"AI_ACT, HSL, OSL, Patientdatalagen","AI_ACT, HSL, OSL, Patientdatalagen",PASS
+T15,False,False,False,True,True,True,False,"HSL, OSL, Patientdatalagen, Patientsäkerhetslagen","HSL, OSL, Patientdatalagen, Patientsäkerhetslagen",PASS
+T16,False,False,False,True,True,True,True,"AI_ACT, HSL, OSL, Patientdatalagen, Patientsäkerhetslagen","AI_ACT, HSL, OSL, Patientdatalagen, Patientsäkerhetslagen",PASS
+T17,False,False,True,False,False,False,False,MDR,MDR,PASS
+T18,False,False,True,False,False,False,True,"AI_ACT, MDR","AI_ACT, MDR",PASS
+T19,False,False,True,False,False,True,False,"MDR, Patientsäkerhetslagen","MDR, Patientsäkerhetslagen",PASS
+T20,False,False,True,False,False,True,True,"AI_ACT, MDR, Patientsäkerhetslagen","AI_ACT, MDR, Patientsäkerhetslagen",PASS
+T21,False,False,True,False,True,False,False,"MDR, OSL, Patientdatalagen","MDR, OSL, Patientdatalagen",PASS
+T22,False,False,True,False,True,False,True,"AI_ACT, MDR, OSL, Patientdatalagen","AI_ACT, MDR, OSL, Patientdatalagen",PASS
+T23,False,False,True,False,True,True,False,"MDR, OSL, Patientdatalagen, Patientsäkerhetslagen","MDR, OSL, Patientdatalagen, Patientsäkerhetslagen",PASS
+T24,False,False,True,False,True,True,True,"AI_ACT, MDR, OSL, Patientdatalagen, Patientsäkerhetslagen","AI_ACT, MDR, OSL, Patientdatalagen, Patientsäkerhetslagen",PASS
+T25,False,False,True,True,False,False,False,"HSL, MDR","HSL, MDR",PASS
+T26,False,False,True,True,False,False,True,"AI_ACT, HSL, MDR","AI_ACT, HSL, MDR",PASS
+T27,False,False,True,True,False,True,False,"HSL, MDR, Patientsäkerhetslagen","HSL, MDR, Patientsäkerhetslagen",PASS
+T28,False,False,True,True,False,True,True,"AI_ACT, HSL, MDR, Patientsäkerhetslagen","AI_ACT, HSL, MDR, Patientsäkerhetslagen",PASS
+T29,False,False,True,True,True,False,False,"HSL, MDR, OSL, Patientdatalagen","HSL, MDR, OSL, Patientdatalagen",PASS
+T30,False,False,True,True,True,False,True,"AI_ACT, HSL, MDR, OSL, Patientdatalagen","AI_ACT, HSL, MDR, OSL, Patientdatalagen",PASS
+T31,False,False,True,True,True,True,False,"HSL, MDR, OSL, Patientdatalagen, Patientsäkerhetslagen","HSL, MDR, OSL, Patientdatalagen, Patientsäkerhetslagen",PASS
+T32,False,False,True,True,True,True,True,"AI_ACT, HSL, MDR, OSL, Patientdatalagen, Patientsäkerhetslagen","AI_ACT, HSL, MDR, OSL, Patientdatalagen, Patientsäkerhetslagen",PASS
+T33,False,True,False,False,False,False,False,GDPR,GDPR,PASS
+T34,False,True,False,False,False,False,True,"AI_ACT, GDPR","AI_ACT, GDPR",PASS
+T35,False,True,False,False,False,True,False,"GDPR, Patientsäkerhetslagen","GDPR, Patientsäkerhetslagen",PASS
+T36,False,True,False,False,False,True,True,"AI_ACT, GDPR, Patientsäkerhetslagen","AI_ACT, GDPR, Patientsäkerhetslagen",PASS
+T37,False,True,False,False,True,False,False,"GDPR, OSL, Patientdatalagen","GDPR, OSL, Patientdatalagen",PASS
+T38,False,True,False,False,True,False,True,"AI_ACT, GDPR, OSL, Patientdatalagen","AI_ACT, GDPR, OSL, Patientdatalagen",PASS
+T39,False,True,False,False,True,True,False,"GDPR, OSL, Patientdatalagen, Patientsäkerhetslagen","GDPR, OSL, Patientdatalagen, Patientsäkerhetslagen",PASS
+T40,False,True,False,False,True,True,True,"AI_ACT, GDPR, OSL, Patientdatalagen, Patientsäkerhetslagen","AI_ACT, GDPR, OSL, Patientdatalagen, Patientsäkerhetslagen",PASS
+T41,False,True,False,True,False,False,False,"GDPR, HSL","GDPR, HSL",PASS
+T42,False,True,False,True,False,False,True,"AI_ACT, GDPR, HSL","AI_ACT, GDPR, HSL",PASS
+T43,False,True,False,True,False,True,False,"GDPR, HSL, Patientsäkerhetslagen","GDPR, HSL, Patientsäkerhetslagen",PASS
+T44,False,True,False,True,False,True,True,"AI_ACT, GDPR, HSL, Patientsäkerhetslagen","AI_ACT, GDPR, HSL, Patientsäkerhetslagen",PASS
+T45,False,True,False,True,True,False,False,"GDPR, HSL, OSL, Patientdatalagen","GDPR, HSL, OSL, Patientdatalagen",PASS
+T46,False,True,False,True,True,False,True,"AI_ACT, GDPR, HSL, OSL, Patientdatalagen","AI_ACT, GDPR, HSL, OSL, Patientdatalagen",PASS
+T47,False,True,False,True,True,True,False,"GDPR, HSL, OSL, Patientdatalagen, Patientsäkerhetslagen","GDPR, HSL, OSL, Patientdatalagen, Patientsäkerhetslagen",PASS
+T48,False,True,False,True,True,True,True,"AI_ACT, GDPR, HSL, OSL, Patientdatalagen, Patientsäkerhetslagen","AI_ACT, GDPR, HSL, OSL, Patientdatalagen, Patientsäkerhetslagen",PASS
+T49,False,True,True,False,False,False,False,"GDPR, MDR","GDPR, MDR",PASS
+T50,False,True,True,False,False,False,True,"AI_ACT, GDPR, MDR","AI_ACT, GDPR, MDR",PASS
+T51,False,True,True,False,False,True,False,"GDPR, MDR, Patientsäkerhetslagen","GDPR, MDR, Patientsäkerhetslagen",PASS
+T52,False,True,True,False,False,True,True,"AI_ACT, GDPR, MDR, Patientsäkerhetslagen","AI_ACT, GDPR, MDR, Patientsäkerhetslagen",PASS
+T53,False,True,True,False,True,False,False,"GDPR, MDR, OSL, Patientdatalagen","GDPR, MDR, OSL, Patientdatalagen",PASS
+T54,False,True,True,False,True,False,True,"AI_ACT, GDPR, MDR, OSL, Patientdatalagen","AI_ACT, GDPR, MDR, OSL, Patientdatalagen",PASS
+T55,False,True,True,False,True,True,False,"GDPR, MDR, OSL, Patientdatalagen, Patientsäkerhetslagen","GDPR, MDR, OSL, Patientdatalagen, Patientsäkerhetslagen",PASS
+T56,False,True,True,False,True,True,True,"AI_ACT, GDPR, MDR, OSL, Patientdatalagen, Patientsäkerhetslagen","AI_ACT, GDPR, MDR, OSL, Patientdatalagen, Patientsäkerhetslagen",PASS
+T57,False,True,True,True,False,False,False,"GDPR, HSL, MDR","GDPR, HSL, MDR",PASS
+T58,False,True,True,True,False,False,True,"AI_ACT, GDPR, HSL, MDR","AI_ACT, GDPR, HSL, MDR",PASS
+T59,False,True,True,True,False,True,False,"GDPR, HSL, MDR, Patientsäkerhetslagen","GDPR, HSL, MDR, Patientsäkerhetslagen",PASS
+T60,False,True,True,True,False,True,True,"AI_ACT, GDPR, HSL, MDR, Patientsäkerhetslagen","AI_ACT, GDPR, HSL, MDR, Patientsäkerhetslagen",PASS
+T61,False,True,True,True,True,False,False,"GDPR, HSL, MDR, OSL, Patientdatalagen","GDPR, HSL, MDR, OSL, Patientdatalagen",PASS
+T62,False,True,True,True,True,False,True,"AI_ACT, GDPR, HSL, MDR, OSL, Patientdatalagen","AI_ACT, GDPR, HSL, MDR, OSL, Patientdatalagen",PASS
+T63,False,True,True,True,True,True,False,"GDPR, HSL, MDR, OSL, Patientdatalagen, Patientsäkerhetslagen","GDPR, HSL, MDR, OSL, Patientdatalagen, Patientsäkerhetslagen",PASS
+T64,False,True,True,True,True,True,True,"AI_ACT, GDPR, HSL, MDR, OSL, Patientdatalagen, Patientsäkerhetslagen","AI_ACT, GDPR, HSL, MDR, OSL, Patientdatalagen, Patientsäkerhetslagen",PASS
+T65,True,False,False,False,False,False,False,GDPR,GDPR,PASS
+T66,True,False,False,False,False,False,True,"AI_ACT, GDPR","AI_ACT, GDPR",PASS
+T67,True,False,False,False,False,True,False,"GDPR, Patientsäkerhetslagen","GDPR, Patientsäkerhetslagen",PASS
+T68,True,False,False,False,False,True,True,"AI_ACT, GDPR, Patientsäkerhetslagen","AI_ACT, GDPR, Patientsäkerhetslagen",PASS
+T69,True,False,False,False,True,False,False,"GDPR, OSL, Patientdatalagen","GDPR, OSL, Patientdatalagen",PASS
+T70,True,False,False,False,True,False,True,"AI_ACT, GDPR, OSL, Patientdatalagen","AI_ACT, GDPR, OSL, Patientdatalagen",PASS
+T71,True,False,False,False,True,True,False,"GDPR, OSL, Patientdatalagen, Patientsäkerhetslagen","GDPR, OSL, Patientdatalagen, Patientsäkerhetslagen",PASS
+T72,True,False,False,False,True,True,True,"AI_ACT, GDPR, OSL, Patientdatalagen, Patientsäkerhetslagen","AI_ACT, GDPR, OSL, Patientdatalagen, Patientsäkerhetslagen",PASS
+T73,True,False,False,True,False,False,False,"GDPR, HSL","GDPR, HSL",PASS
+T74,True,False,False,True,False,False,True,"AI_ACT, GDPR, HSL","AI_ACT, GDPR, HSL",PASS
+T75,True,False,False,True,False,True,False,"GDPR, HSL, Patientsäkerhetslagen","GDPR, HSL, Patientsäkerhetslagen",PASS
+T76,True,False,False,True,False,True,True,"AI_ACT, GDPR, HSL, Patientsäkerhetslagen","AI_ACT, GDPR, HSL, Patientsäkerhetslagen",PASS
+T77,True,False,False,True,True,False,False,"GDPR, HSL, OSL, Patientdatalagen","GDPR, HSL, OSL, Patientdatalagen",PASS
+T78,True,False,False,True,True,False,True,"AI_ACT, GDPR, HSL, OSL, Patientdatalagen","AI_ACT, GDPR, HSL, OSL, Patientdatalagen",PASS
+T79,True,False,False,True,True,True,False,"GDPR, HSL, OSL, Patientdatalagen, Patientsäkerhetslagen","GDPR, HSL, OSL, Patientdatalagen, Patientsäkerhetslagen",PASS
+T80,True,False,False,True,True,True,True,"AI_ACT, GDPR, HSL, OSL, Patientdatalagen, Patientsäkerhetslagen","AI_ACT, GDPR, HSL, OSL, Patientdatalagen, Patientsäkerhetslagen",PASS
+T81,True,False,True,False,False,False,False,"GDPR, MDR","GDPR, MDR",PASS
+T82,True,False,True,False,False,False,True,"AI_ACT, GDPR, MDR","AI_ACT, GDPR, MDR",PASS
+T83,True,False,True,False,False,True,False,"GDPR, MDR, Patientsäkerhetslagen","GDPR, MDR, Patientsäkerhetslagen",PASS
+T84,True,False,True,False,False,True,True,"AI_ACT, GDPR, MDR, Patientsäkerhetslagen","AI_ACT, GDPR, MDR, Patientsäkerhetslagen",PASS
+T85,True,False,True,False,True,False,False,"GDPR, MDR, OSL, Patientdatalagen","GDPR, MDR, OSL, Patientdatalagen",PASS
+T86,True,False,True,False,True,False,True,"AI_ACT, GDPR, MDR, OSL, Patientdatalagen","AI_ACT, GDPR, MDR, OSL, Patientdatalagen",PASS
+T87,True,False,True,False,True,True,False,"GDPR, MDR, OSL, Patientdatalagen, Patientsäkerhetslagen","GDPR, MDR, OSL, Patientdatalagen, Patientsäkerhetslagen",PASS
+T88,True,False,True,False,True,True,True,"AI_ACT, GDPR, MDR, OSL, Patientdatalagen, Patientsäkerhetslagen","AI_ACT, GDPR, MDR, OSL, Patientdatalagen, Patientsäkerhetslagen",PASS
+T89,True,False,True,True,False,False,False,"GDPR, HSL, MDR","GDPR, HSL, MDR",PASS
+T90,True,False,True,True,False,False,True,"AI_ACT, GDPR, HSL, MDR","AI_ACT, GDPR, HSL, MDR",PASS
+T91,True,False,True,True,False,True,False,"GDPR, HSL, MDR, Patientsäkerhetslagen","GDPR, HSL, MDR, Patientsäkerhetslagen",PASS
+T92,True,False,True,True,False,True,True,"AI_ACT, GDPR, HSL, MDR, Patientsäkerhetslagen","AI_ACT, GDPR, HSL, MDR, Patientsäkerhetslagen",PASS
+T93,True,False,True,True,True,False,False,"GDPR, HSL, MDR, OSL, Patientdatalagen","GDPR, HSL, MDR, OSL, Patientdatalagen",PASS
+T94,True,False,True,True,True,False,True,"AI_ACT, GDPR, HSL, MDR, OSL, Patientdatalagen","AI_ACT, GDPR, HSL, MDR, OSL, Patientdatalagen",PASS
+T95,True,False,True,True,True,True,False,"GDPR, HSL, MDR, OSL, Patientdatalagen, Patientsäkerhetslagen","GDPR, HSL, MDR, OSL, Patientdatalagen, Patientsäkerhetslagen",PASS
+T96,True,False,True,True,True,True,True,"AI_ACT, GDPR, HSL, MDR, OSL, Patientdatalagen, Patientsäkerhetslagen","AI_ACT, GDPR, HSL, MDR, OSL, Patientdatalagen, Patientsäkerhetslagen",PASS
+T97,True,True,False,False,False,False,False,GDPR,GDPR,PASS
+T98,True,True,False,False,False,False,True,"AI_ACT, GDPR","AI_ACT, GDPR",PASS
+T99,True,True,False,False,False,True,False,"GDPR, Patientsäkerhetslagen","GDPR, Patientsäkerhetslagen",PASS
+T100,True,True,False,False,False,True,True,"AI_ACT, GDPR, Patientsäkerhetslagen","AI_ACT, GDPR, Patientsäkerhetslagen",PASS
+T101,True,True,False,False,True,False,False,"GDPR, OSL, Patientdatalagen","GDPR, OSL, Patientdatalagen",PASS
+T102,True,True,False,False,True,False,True,"AI_ACT, GDPR, OSL, Patientdatalagen","AI_ACT, GDPR, OSL, Patientdatalagen",PASS
+T103,True,True,False,False,True,True,False,"GDPR, OSL, Patientdatalagen, Patientsäkerhetslagen","GDPR, OSL, Patientdatalagen, Patientsäkerhetslagen",PASS
+T104,True,True,False,False,True,True,True,"AI_ACT, GDPR, OSL, Patientdatalagen, Patientsäkerhetslagen","AI_ACT, GDPR, OSL, Patientdatalagen, Patientsäkerhetslagen",PASS
+T105,True,True,False,True,False,False,False,"GDPR, HSL","GDPR, HSL",PASS
+T106,True,True,False,True,False,False,True,"AI_ACT, GDPR, HSL","AI_ACT, GDPR, HSL",PASS
+T107,True,True,False,True,False,True,False,"GDPR, HSL, Patientsäkerhetslagen","GDPR, HSL, Patientsäkerhetslagen",PASS
+T108,True,True,False,True,False,True,True,"AI_ACT, GDPR, HSL, Patientsäkerhetslagen","AI_ACT, GDPR, HSL, Patientsäkerhetslagen",PASS
+T109,True,True,False,True,True,False,False,"GDPR, HSL, OSL, Patientdatalagen","GDPR, HSL, OSL, Patientdatalagen",PASS
+T110,True,True,False,True,True,False,True,"AI_ACT, GDPR, HSL, OSL, Patientdatalagen","AI_ACT, GDPR, HSL, OSL, Patientdatalagen",PASS
+T111,True,True,False,True,True,True,False,"GDPR, HSL, OSL, Patientdatalagen, Patientsäkerhetslagen","GDPR, HSL, OSL, Patientdatalagen, Patientsäkerhetslagen",PASS
+T112,True,True,False,True,True,True,True,"AI_ACT, GDPR, HSL, OSL, Patientdatalagen, Patientsäkerhetslagen","AI_ACT, GDPR, HSL, OSL, Patientdatalagen, Patientsäkerhetslagen",PASS
+T113,True,True,True,False,False,False,False,"GDPR, MDR","GDPR, MDR",PASS
+T114,True,True,True,False,False,False,True,"AI_ACT, GDPR, MDR","AI_ACT, GDPR, MDR",PASS
+T115,True,True,True,False,False,True,False,"GDPR, MDR, Patientsäkerhetslagen","GDPR, MDR, Patientsäkerhetslagen",PASS
+T116,True,True,True,False,False,True,True,"AI_ACT, GDPR, MDR, Patientsäkerhetslagen","AI_ACT, GDPR, MDR, Patientsäkerhetslagen",PASS
+T117,True,True,True,False,True,False,False,"GDPR, MDR, OSL, Patientdatalagen","GDPR, MDR, OSL, Patientdatalagen",PASS
+T118,True,True,True,False,True,False,True,"AI_ACT, GDPR, MDR, OSL, Patientdatalagen","AI_ACT, GDPR, MDR, OSL, Patientdatalagen",PASS
+T119,True,True,True,False,True,True,False,"GDPR, MDR, OSL, Patientdatalagen, Patientsäkerhetslagen","GDPR, MDR, OSL, Patientdatalagen, Patientsäkerhetslagen",PASS
+T120,True,True,True,False,True,True,True,"AI_ACT, GDPR, MDR, OSL, Patientdatalagen, Patientsäkerhetslagen","AI_ACT, GDPR, MDR, OSL, Patientdatalagen, Patientsäkerhetslagen",PASS
+T121,True,True,True,True,False,False,False,"GDPR, HSL, MDR","GDPR, HSL, MDR",PASS
+T122,True,True,True,True,False,False,True,"AI_ACT, GDPR, HSL, MDR","AI_ACT, GDPR, HSL, MDR",PASS
+T123,True,True,True,True,False,True,False,"GDPR, HSL, MDR, Patientsäkerhetslagen","GDPR, HSL, MDR, Patientsäkerhetslagen",PASS
+T124,True,True,True,True,False,True,True,"AI_ACT, GDPR, HSL, MDR, Patientsäkerhetslagen","AI_ACT, GDPR, HSL, MDR, Patientsäkerhetslagen",PASS
+T125,True,True,True,True,True,False,False,"GDPR, HSL, MDR, OSL, Patientdatalagen","GDPR, HSL, MDR, OSL, Patientdatalagen",PASS
+T126,True,True,True,True,True,False,True,"AI_ACT, GDPR, HSL, MDR, OSL, Patientdatalagen","AI_ACT, GDPR, HSL, MDR, OSL, Patientdatalagen",PASS
+T127,True,True,True,True,True,True,False,"GDPR, HSL, MDR, OSL, Patientdatalagen, Patientsäkerhetslagen","GDPR, HSL, MDR, OSL, Patientdatalagen, Patientsäkerhetslagen",PASS
+T128,True,True,True,True,True,True,True,"AI_ACT, GDPR, HSL, MDR, OSL, Patientdatalagen, Patientsäkerhetslagen","AI_ACT, GDPR, HSL, MDR, OSL, Patientdatalagen, Patientsäkerhetslagen",PASS
