@@ -34,6 +34,16 @@ def get_api_key():
         return st.secrets["GOOGLE_API_KEY"]
     return os.getenv("GOOGLE_API_KEY")
 
+def reset_app():
+    for key in [
+        "current_q_index", "answers", "conversation", "followup_chat",
+        "show_results", "ai_summary", "triggered_regs",
+        "show_welcome", "session_started"
+    ]:
+        if key in st.session_state:
+            del st.session_state[key]
+    st.rerun()
+
 def get_llm_explanation(triggered_regulations, user_answers):
     if not triggered_regulations:
         return "No major regulations were identified based on your answers. However, expert review may still be needed."
@@ -59,6 +69,7 @@ IMPORTANT RULES:
 - Do not override the regulations listed above
 - Mention all listed regulations naturally
 - Keep it short, around 2-3 sentences
+- End with: This is guidance only, not legal advice.
 """
 
     try:
@@ -67,17 +78,55 @@ IMPORTANT RULES:
             model="gemini-2.5-flash",
             contents=prompt
         )
-        return response.text
+        return response.text or "Could not generate a summary."
     except Exception:
         reg_list = ", ".join(triggered_regulations)
-        return f"Based on your answers, review: {reg_list}"
+        return f"Based on your answers, review: {reg_list}. This is guidance only, not legal advice."
+
+def get_followup_answer(user_question):
+    conversation_text = ""
+    for msg in st.session_state.followup_chat:
+        role = "User" if msg["role"] == "user" else "Assistant"
+        conversation_text += f"{role}: {msg['content']}\n"
+
+    prompt = f"""
+You are a regulatory assistant for digital health products.
+
+The user answered:
+{st.session_state.answers}
+
+The system identified these relevant regulations:
+{', '.join(st.session_state.triggered_regs)}
+
+Conversation so far:
+{conversation_text}
+
+Latest user question:
+{user_question}
+
+Answer the latest user question naturally.
+
+IMPORTANT:
+- Answer only based on the regulations listed above
+- Do not introduce new regulations
+- Explain in relation to the user's product and previous answers
+- Give practical meaning: what the user should review or do next
+- Keep the answer short, around 2-3 sentences
+- End with: This is guidance only, not legal advice.
+"""
+
+    client = genai.Client(api_key=get_api_key())
+    response = client.models.generate_content(
+        model="gemini-2.5-flash",
+        contents=prompt
+    )
+    return response.text or "Sorry, I could not generate an answer."
 
 if "current_q_index" not in st.session_state:
     st.session_state.current_q_index = 0
     st.session_state.answers = {}
     st.session_state.conversation = []
     st.session_state.followup_chat = []
-    st.session_state.followup_input = ""
     st.session_state.show_results = False
     st.session_state.ai_summary = None
     st.session_state.triggered_regs = []
@@ -94,14 +143,7 @@ with col_title:
 with col_reset:
     st.write("")
     if st.button("🔄", help="Start Over - Reset all answers and begin new assessment"):
-        for key in [
-            "current_q_index", "answers", "conversation", "followup_chat",
-            "followup_input", "show_results", "ai_summary", "triggered_regs",
-            "show_welcome", "session_started"
-        ]:
-            if key in st.session_state:
-                del st.session_state[key]
-        st.rerun()
+        reset_app()
 
 with col_about:
     st.write("")
@@ -126,18 +168,23 @@ if not st.session_state.session_started:
         st.write(
             "👋 Hello! I'm your digital health regulatory assistant.\n\n"
             "I'll ask you a few questions about your product, then tell you "
-            "which EU and Swedish regulations may apply.\n\n"
+            "which EU and Swedish regulations may apply."
         )
+
         col1, col2, col3 = st.columns([1, 2, 1])
         with col2:
             if st.button("Start Assessment", use_container_width=True):
                 st.session_state.session_started = True
                 st.rerun()
+
     st.stop()
 
 if not st.session_state.show_results and st.session_state.current_q_index > 0:
     progress = st.session_state.current_q_index / len(questions)
-    st.progress(progress, text=f"Question {st.session_state.current_q_index} of {len(questions)}")
+    st.progress(
+        progress,
+        text=f"Question {st.session_state.current_q_index} of {len(questions)}"
+    )
 
 for msg in st.session_state.conversation:
     with st.chat_message(msg["role"]):
@@ -189,6 +236,7 @@ if not st.session_state.show_results:
                     })
                     st.session_state.current_q_index += 1
                     st.rerun()
+
     else:
         st.session_state.show_results = True
         st.rerun()
@@ -197,7 +245,9 @@ else:
     with st.chat_message("assistant"):
         if st.session_state.ai_summary is None:
             with st.spinner("📋 Analyzing your responses..."):
-                st.session_state.triggered_regs = evaluate_regulations(st.session_state.answers)
+                st.session_state.triggered_regs = evaluate_regulations(
+                    st.session_state.answers
+                )
                 st.session_state.ai_summary = get_llm_explanation(
                     st.session_state.triggered_regs,
                     st.session_state.answers
@@ -224,14 +274,17 @@ else:
         with st.chat_message(msg["role"]):
             st.write(msg["content"])
 
-    user_question = st.text_input(
-        "Ask a follow-up question:",
-        placeholder="e.g. Why does GDPR apply to my product?",
-        key="followup_input"
-    )
+    with st.form("followup_form", clear_on_submit=True):
+        user_question = st.text_input(
+            "Ask a follow-up question:",
+            placeholder="e.g. Why does GDPR apply to my product?"
+        )
+        submitted = st.form_submit_button("Send question")
 
-    if st.button("Send question"):
-        if user_question.strip() == "":
+    if submitted:
+        user_question = user_question.strip()
+
+        if not user_question:
             st.warning("Please write a question first.")
         else:
             st.session_state.followup_chat.append({
@@ -239,63 +292,25 @@ else:
                 "content": user_question
             })
 
-            conversation_text = ""
-            for msg in st.session_state.followup_chat:
-                role = "User" if msg["role"] == "user" else "Assistant"
-                conversation_text += f"{role}: {msg['content']}\n"
-
-            prompt = f"""
-You are a regulatory assistant for digital health products.
-
-The user answered:
-{st.session_state.answers}
-
-The system identified these relevant regulations:
-{', '.join(st.session_state.triggered_regs)}
-
-Conversation so far:
-{conversation_text}
-
-Continue the conversation naturally and answer the latest user question.
-
-IMPORTANT:
-- Answer only based on the regulations listed above
-- Do not introduce new regulations
-- Explain in relation to the user's product and previous answers
-- Give practical meaning: what the user should review or do next
-- Keep the answer short, around 2-3 sentences
-- This is guidance only, not legal advice
-"""
-
             try:
-                client = genai.Client(api_key=get_api_key())
-                response = client.models.generate_content(
-                    model="gemini-2.5-flash",
-                    contents=prompt
-                )
-
-                ai_answer = response.text
+                with st.spinner("Thinking..."):
+                    ai_answer = get_followup_answer(user_question)
 
                 st.session_state.followup_chat.append({
                     "role": "assistant",
                     "content": ai_answer
                 })
 
-                st.session_state.followup_input = ""
-                st.rerun()
-
             except Exception:
-                st.warning("AI is temporarily busy. Please try again in a moment.")
+                st.session_state.followup_chat.append({
+                    "role": "assistant",
+                    "content": "AI is temporarily busy. Please try again in a moment."
+                })
+
+            st.rerun()
 
     col1, col2, col3 = st.columns([1, 2, 1])
 
     with col2:
         if st.button("🔄 Start New Assessment", use_container_width=True):
-            for key in [
-                "current_q_index", "answers", "conversation", "followup_chat",
-                "followup_input", "show_results", "ai_summary",
-                "triggered_regs", "show_welcome", "session_started"
-            ]:
-                if key in st.session_state:
-                    del st.session_state[key]
-            st.rerun()
+            reset_app()
