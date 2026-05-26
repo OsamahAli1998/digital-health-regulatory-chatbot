@@ -1,25 +1,28 @@
-/* style.css */
-
 /* App background */
 .stApp {
     background-color: #fff5f5;
 }
 
-/* content color */
+/* Text color */
 .stApp, .stMarkdown, .stChatMessage, .stAlert, .stInfo {
     color: #1a1a1a !important;
-} 
-/* Chat messages */
-[data-testid="stChatMessage"][data-testid="user"] {
-    background-color: #e8e6f0;
-    border-radius: 20px;
-    padding: 10px;
 }
 
-[data-testid="stChatMessage"][data-testid="assistant"] {
-    background-color: #e0f2e9;
+/* Chat messages */
+[data-testid="stChatMessage"] {
     border-radius: 20px;
-    padding: 10px;
+    padding: 12px;
+    margin-bottom: 8px;
+}
+
+/* User message */
+[data-testid="stChatMessage"][data-author="user"] {
+    background-color: #e8e6f0;
+}
+
+/* Assistant message */
+[data-testid="stChatMessage"][data-author="assistant"] {
+    background-color: #e0f2e9;
 }
 
 /* Buttons */
@@ -27,6 +30,7 @@
     background-color: #c5e0d4;
     border-radius: 30px;
     font-weight: 600;
+    transition: all 0.2s ease;
 }
 
 .stButton button:hover {
@@ -34,7 +38,13 @@
     transform: scale(1.02);
 }
 
-/* Primary button (Start) */
-.stButton button[data-baseweb="button"][kind="primary"] {
+/* Primary button */
+.stButton button[kind="primary"] {
     background-color: #9ec8b5;
+}
+
+/* Input box */
+input, textarea {
+    border-radius: 12px !important;
+    border: 1px solid #ccc !important;
 }
